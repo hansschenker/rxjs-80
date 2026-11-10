@@ -1,0 +1,70 @@
+/** Exactly 80 runtime exports. Configuration helpers live in rxjs-80/controls. */
+export { audit, sample, throttle, debounce } from './temporal.js';
+export { buffer, window } from './grouping.js';
+export { take, skip } from './selection.js';
+export { merge, concat, switchLatest, exhaust } from './flattening.js';
+export { map, distinct } from './values.js';
+export { share } from './sharing.js';
+
+export {
+  catchError,
+  combineAll,
+  combineLatest,
+  combineLatestAll,
+  combineLatestWith,
+  connect,
+  count,
+  defaultIfEmpty,
+  delay,
+  delayWhen,
+  dematerialize,
+  elementAt,
+  endWith,
+  every,
+  expand,
+  filter,
+  finalize,
+  find,
+  findIndex,
+  first,
+  groupBy,
+  ignoreElements,
+  isEmpty,
+  last,
+  materialize,
+  max,
+  mergeScan,
+  min,
+  multicast,
+  observeOn,
+  onErrorResumeNext,
+  pairwise,
+  partition,
+  race,
+  raceWith,
+  reduce,
+  refCount,
+  repeat,
+  repeatWhen,
+  retry,
+  retryWhen,
+  scan,
+  sequenceEqual,
+  single,
+  startWith,
+  subscribeOn,
+  switchScan,
+  tap,
+  throwIfEmpty,
+  timeInterval,
+  timeout,
+  timeoutWith,
+  timestamp,
+  toArray,
+  withLatestFrom,
+  zip,
+  zipAll,
+  zipWith
+} from 'rxjs/operators';
+
+export { defer, from, generate, interval, of, range, timer } from 'rxjs';

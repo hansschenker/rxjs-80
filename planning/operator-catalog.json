@@ -1,0 +1,1037 @@
+{
+  "schemaVersion": 1,
+  "project": "rxjs-80",
+  "rxjsVersion": "7.8.2",
+  "targetOperatorNames": 80,
+  "counting": {
+    "rootOperatorFunctions": 80,
+    "consolidatedFamilies": 15,
+    "unchangedPipeableNames": 58,
+    "creationNames": 7,
+    "originalPipeableNames": 113,
+    "originalNamesInSelectedScope": 120,
+    "helpersCountSeparately": true
+  },
+  "groups": [
+    {
+      "id": "value",
+      "title": "Value Modulators",
+      "question": "What values, collections, or state flow?"
+    },
+    {
+      "id": "time",
+      "title": "Time Modulators",
+      "question": "What event or scheduled moment controls delivery?"
+    },
+    {
+      "id": "route",
+      "title": "Route Modulators",
+      "question": "Which values, sources, inner streams, and notifications are connected or admitted?"
+    }
+  ],
+  "operators": [
+    {
+      "name": "audit",
+      "primaryGroup": "time",
+      "tags": [
+        "time",
+        "signal"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "audit",
+        "auditTime"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "buffer",
+      "primaryGroup": "value",
+      "tags": [
+        "state",
+        "boundaries",
+        "count",
+        "time",
+        "signal",
+        "overlap"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "buffer",
+        "bufferCount",
+        "bufferTime",
+        "bufferToggle",
+        "bufferWhen"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "catchError",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "catchError"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "combineAll",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "combineAll"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "combineLatest",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "combineLatest"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "combineLatestAll",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "combineLatestAll"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "combineLatestWith",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "combineLatestWith"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "concat",
+      "primaryGroup": "route",
+      "tags": [
+        "route",
+        "concurrency",
+        "cancellation"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "concat",
+        "concatAll",
+        "concatMap",
+        "concatMapTo",
+        "concatWith"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "connect",
+      "primaryGroup": "route",
+      "tags": [
+        "sharing",
+        "connection",
+        "reset"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "connect"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "count",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "count"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "debounce",
+      "primaryGroup": "time",
+      "tags": [
+        "time",
+        "signal"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "debounce",
+        "debounceTime"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "defaultIfEmpty",
+      "primaryGroup": "value",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "defaultIfEmpty"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "defer",
+      "primaryGroup": "route",
+      "tags": [
+        "creation"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "defer"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "delay",
+      "primaryGroup": "time",
+      "tags": [
+        "time"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "delay"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "delayWhen",
+      "primaryGroup": "time",
+      "tags": [
+        "time",
+        "signal"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "delayWhen"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "dematerialize",
+      "primaryGroup": "value",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "dematerialize"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "distinct",
+      "primaryGroup": "route",
+      "tags": [
+        "state"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "distinct",
+        "distinctUntilChanged",
+        "distinctUntilKeyChanged"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "elementAt",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "elementAt"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "endWith",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "endWith"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "every",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "every"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "exhaust",
+      "primaryGroup": "route",
+      "tags": [
+        "route",
+        "concurrency",
+        "cancellation"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "exhaust",
+        "exhaustAll",
+        "exhaustMap"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "expand",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "expand"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "filter",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "filter"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "finalize",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "finalize"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "find",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "find"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "findIndex",
+      "primaryGroup": "value",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "findIndex"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "first",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "first"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "from",
+      "primaryGroup": "route",
+      "tags": [
+        "creation"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "from"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "generate",
+      "primaryGroup": "route",
+      "tags": [
+        "creation"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "generate"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "groupBy",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "groupBy"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "ignoreElements",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "ignoreElements"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "interval",
+      "primaryGroup": "time",
+      "tags": [
+        "creation",
+        "time"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "interval"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "isEmpty",
+      "primaryGroup": "value",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "isEmpty"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "last",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "last"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "map",
+      "primaryGroup": "value",
+      "tags": [],
+      "kind": "family",
+      "rxjsNames": [
+        "map",
+        "mapTo",
+        "pluck"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "materialize",
+      "primaryGroup": "value",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "materialize"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "max",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "max"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "merge",
+      "primaryGroup": "route",
+      "tags": [
+        "route",
+        "concurrency",
+        "cancellation"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "merge",
+        "mergeAll",
+        "mergeMap",
+        "mergeMapTo",
+        "mergeWith",
+        "flatMap"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "mergeScan",
+      "primaryGroup": "value",
+      "tags": [
+        "state",
+        "route",
+        "concurrency",
+        "cancellation"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "mergeScan"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "min",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "min"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "multicast",
+      "primaryGroup": "route",
+      "tags": [
+        "sharing",
+        "connection",
+        "reset"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "multicast"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "observeOn",
+      "primaryGroup": "time",
+      "tags": [
+        "time"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "observeOn"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "of",
+      "primaryGroup": "route",
+      "tags": [
+        "creation"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "of"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "onErrorResumeNext",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "onErrorResumeNext"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "pairwise",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "pairwise"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "partition",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "partition"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "race",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "race"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "raceWith",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "raceWith"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "range",
+      "primaryGroup": "route",
+      "tags": [
+        "creation"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "range"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "reduce",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "reduce"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "refCount",
+      "primaryGroup": "route",
+      "tags": [
+        "sharing",
+        "connection",
+        "reset"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "refCount"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "repeat",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "repeat"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "repeatWhen",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "repeatWhen"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "retry",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "retry"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "retryWhen",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "retryWhen"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "sample",
+      "primaryGroup": "time",
+      "tags": [
+        "time",
+        "signal"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "sample",
+        "sampleTime"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "scan",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "scan"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "sequenceEqual",
+      "primaryGroup": "value",
+      "tags": [
+        "state"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "sequenceEqual"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "share",
+      "primaryGroup": "route",
+      "tags": [
+        "sharing",
+        "connection",
+        "reset"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "share",
+        "shareReplay",
+        "publish",
+        "publishBehavior",
+        "publishLast",
+        "publishReplay"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "single",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "single"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "skip",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle",
+        "count",
+        "signal",
+        "predicate",
+        "completion"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "skip",
+        "skipLast",
+        "skipUntil",
+        "skipWhile"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "startWith",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "startWith"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "subscribeOn",
+      "primaryGroup": "time",
+      "tags": [
+        "time"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "subscribeOn"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "switchLatest",
+      "primaryGroup": "route",
+      "tags": [
+        "route",
+        "concurrency",
+        "cancellation"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "switchAll",
+        "switchMap",
+        "switchMapTo"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "switchScan",
+      "primaryGroup": "value",
+      "tags": [
+        "state",
+        "route",
+        "concurrency",
+        "cancellation"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "switchScan"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "take",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle",
+        "count",
+        "signal",
+        "predicate",
+        "completion"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "take",
+        "takeLast",
+        "takeUntil",
+        "takeWhile"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "tap",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "tap"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "throttle",
+      "primaryGroup": "time",
+      "tags": [
+        "time",
+        "signal"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "throttle",
+        "throttleTime"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "throwIfEmpty",
+      "primaryGroup": "route",
+      "tags": [
+        "lifecycle"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "throwIfEmpty"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "timeInterval",
+      "primaryGroup": "value",
+      "tags": [
+        "clock-metadata"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "timeInterval"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "timeout",
+      "primaryGroup": "time",
+      "tags": [
+        "lifecycle",
+        "time"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "timeout"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "timeoutWith",
+      "primaryGroup": "time",
+      "tags": [
+        "lifecycle",
+        "time"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "timeoutWith"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "timer",
+      "primaryGroup": "time",
+      "tags": [
+        "creation",
+        "time"
+      ],
+      "kind": "creation",
+      "rxjsNames": [
+        "timer"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "timestamp",
+      "primaryGroup": "value",
+      "tags": [
+        "clock-metadata"
+      ],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "timestamp"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "toArray",
+      "primaryGroup": "value",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "toArray"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "window",
+      "primaryGroup": "route",
+      "tags": [
+        "state",
+        "boundaries",
+        "count",
+        "time",
+        "signal",
+        "overlap"
+      ],
+      "kind": "family",
+      "rxjsNames": [
+        "window",
+        "windowCount",
+        "windowTime",
+        "windowToggle",
+        "windowWhen"
+      ],
+      "verification": "delegated-with-tests"
+    },
+    {
+      "name": "withLatestFrom",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "withLatestFrom"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "zip",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "zip"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "zipAll",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "zipAll"
+      ],
+      "verification": "direct-export"
+    },
+    {
+      "name": "zipWith",
+      "primaryGroup": "route",
+      "tags": [],
+      "kind": "passthrough",
+      "rxjsNames": [
+        "zipWith"
+      ],
+      "verification": "direct-export"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "rxjs-80",
+  "version": "0.1.0",
+  "description": "80 RxJS operator names, organized by behavioral family and explicit policy configuration.",
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/hansschenker/rxjs-80.git" },
+  "engines": { "node": ">=20" },
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./controls": { "types": "./dist/controls.d.ts", "import": "./dist/controls.js" }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "inventory": "node scripts/inventory.mjs",
+    "check": "npm run typecheck && npm run build && npm test && npm run inventory",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": { "rxjs": "7.8.2" },
+  "devDependencies": {
+    "rxjs": "7.8.2",
+    "typescript": "5.8.3",
+    "vitest": "3.0.7",
+    "fast-check": "3.23.2",
+    "@types/node": "22.13.10"
+  }
+}
