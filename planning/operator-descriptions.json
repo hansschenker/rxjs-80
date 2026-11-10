@@ -1,0 +1,402 @@
+{
+  "audit": {
+    "summary": "Keep the latest value while waiting for a duration signal.",
+    "behavior": "The first value starts waiting. Later values replace the stored value without restarting the duration. A duration next emits the stored value; silent duration completion does not.",
+    "example": "source$.pipe(audit(withTime(250)))"
+  },
+  "buffer": {
+    "summary": "Collect values and deliver them together as arrays.",
+    "behavior": "The control chooses count, time, boundary signals, or opening and closing signals. Each closing buffer emits its collected values. Overlapping buffers can contain the same source value.",
+    "example": "source$.pipe(buffer(withCount(3)))"
+  },
+  "catchError": {
+    "summary": "Choose another stream when the source fails.",
+    "behavior": "Values pass through until an error. The selector receives the error and returns a replacement stream. Its values and termination become the output.",
+    "example": "source$.pipe(catchError(error => recover(error)))"
+  },
+  "combineAll": {
+    "summary": "Collect inner streams, then combine their latest values.",
+    "behavior": "This compatibility alias delegates to combineLatestAll. It waits for the outer stream to complete before subscribing to the collected inner streams.",
+    "example": "inners$.pipe(combineAll())"
+  },
+  "combineLatest": {
+    "summary": "Combine the latest value from each input.",
+    "behavior": "This is the legacy pipeable form, not the static creation function. It waits until every input has emitted, then emits the latest tuple on an input change. Prefer combineLatestWith for new code.",
+    "example": "source$.pipe(combineLatest(other$))"
+  },
+  "combineLatestAll": {
+    "summary": "After the outer stream completes, combine its inner streams.",
+    "behavior": "First collect the inner streams. On outer completion, subscribe to them and wait for each to supply a first value. Then emit the current tuple whenever an inner supplies a new value.",
+    "example": "inners$.pipe(combineLatestAll())"
+  },
+  "combineLatestWith": {
+    "summary": "Emit a tuple when any participating input changes.",
+    "behavior": "Subscribe to the source and peers. Wait for a first value from every input; then each new value produces a tuple containing their latest values.",
+    "example": "source$.pipe(combineLatestWith(other$))"
+  },
+  "concat": {
+    "summary": "Queue work and process one inner stream at a time.",
+    "behavior": "With a projection, new values queue while an inner is active. Call the projection only when work is admitted. Subscribe to the next inner after the current one completes.",
+    "example": "requests$.pipe(concat(withProjection(save)))"
+  },
+  "connect": {
+    "summary": "Share one source connection inside a selector.",
+    "behavior": "The selector builds an output using a shared view of the source. Subscribe to that selected output before connecting the source, allowing several internal branches to observe a synchronous source.",
+    "example": "source$.pipe(connect(shared$ => shared$.pipe(buffer(shared$.pipe(take(withCount(3)))))))"
+  },
+  "count": {
+    "summary": "Emit how many source values matched.",
+    "behavior": "Keep a counter, optionally testing a predicate. Emit the final count only when the source completes; an empty source yields zero.",
+    "example": "source$.pipe(count(value => value > 0))"
+  },
+  "debounce": {
+    "summary": "Wait for a quiet interval before emitting the latest value.",
+    "behavior": "Every source value replaces the pending value and cancels the previous duration. A next from the current duration emits it. Source completion flushes a pending value.",
+    "example": "source$.pipe(debounce(withTime(300)))"
+  },
+  "defaultIfEmpty": {
+    "summary": "Provide a value when the source completes empty.",
+    "behavior": "Forward all source values. If completion arrives before any value, emit the supplied default and then complete. Errors do not produce a default.",
+    "example": "source$.pipe(defaultIfEmpty('No values'))"
+  },
+  "defer": {
+    "summary": "Choose the source separately for each subscription.",
+    "behavior": "Call the factory when a consumer subscribes. Subscribe to the returned ObservableInput; a factory exception becomes an output error.",
+    "example": "defer(() => loadCurrentSettings())"
+  },
+  "delay": {
+    "summary": "Move value delivery later using a scheduler.",
+    "behavior": "Delay each value by the specified duration or date. Pending values postpone completion. An error is forwarded immediately and drops pending values.",
+    "example": "source$.pipe(delay(250))"
+  },
+  "delayWhen": {
+    "summary": "Give each value its own release signal.",
+    "behavior": "For each value, subscribe to the selected duration. Its first next releases that value; completion without a next drops it. Different durations can reorder delivery.",
+    "example": "source$.pipe(delayWhen(value => releaseFor(value)))"
+  },
+  "dematerialize": {
+    "summary": "Turn notification values back into stream events.",
+    "behavior": "A next notification becomes an output value; an error or complete notification terminates the output accordingly. This reverses materialize for a valid notification stream.",
+    "example": "notifications$.pipe(dematerialize())"
+  },
+  "distinct": {
+    "summary": "Admit values according to remembered keys.",
+    "behavior": "All-history mode keeps seen keys in a Set. Last-emitted mode compares with the last emitted key. A key selector affects comparison, while the original value still flows downstream.",
+    "example": "source$.pipe(distinct(withHistory('lastEmitted'), withKey(getId)))"
+  },
+  "elementAt": {
+    "summary": "Take the value at a zero-based position.",
+    "behavior": "Count incoming values and emit the selected position, then complete and close upstream. If the source ends too soon, emit an explicit default or raise ArgumentOutOfRangeError.",
+    "example": "source$.pipe(elementAt(2))"
+  },
+  "endWith": {
+    "summary": "Append values after successful source completion.",
+    "behavior": "Forward source values, then emit the supplied suffix and complete. Source errors and downstream cancellation do not emit that suffix.",
+    "example": "source$.pipe(endWith('Finished'))"
+  },
+  "every": {
+    "summary": "Ask whether all source values satisfy a predicate.",
+    "behavior": "Emit false and complete at the first failure. If the source completes without a failure, emit true, including for an empty source.",
+    "example": "source$.pipe(every(isValid))"
+  },
+  "exhaust": {
+    "summary": "Ignore new work while an inner stream is busy.",
+    "behavior": "Admit a value only when no inner is active. Ignored values do not run the projection. Inner completion permits the next source value to start work.",
+    "example": "clicks$.pipe(exhaust(withProjection(submit)))"
+  },
+  "expand": {
+    "summary": "Recursively project each value into more values.",
+    "behavior": "Emit source values and recursively project both source and generated values. A concurrency limit bounds active inner subscriptions; an unbounded expansion needs a stopping rule.",
+    "example": "seed$.pipe(expand(nextPage), take(withCount(5)))"
+  },
+  "filter": {
+    "summary": "Let values through when a predicate accepts them.",
+    "behavior": "Evaluate the predicate for each source value. Forward accepted values unchanged and discard the others. A thrown predicate error terminates the stream.",
+    "example": "source$.pipe(filter(isValid))"
+  },
+  "finalize": {
+    "summary": "Run cleanup when this subscription ends.",
+    "behavior": "Invoke the callback after completion, error, or explicit unsubscription. It observes the subscription lifetime and does not transform values.",
+    "example": "source$.pipe(finalize(releaseResources))"
+  },
+  "find": {
+    "summary": "Take the first value that matches a predicate.",
+    "behavior": "Emit the first match and complete early. If the source completes without a match, emit undefined and complete.",
+    "example": "source$.pipe(find(isValid))"
+  },
+  "findIndex": {
+    "summary": "Report the position of the first matching value.",
+    "behavior": "Emit the zero-based index of the first match and complete early. Source completion without a match emits minus one.",
+    "example": "source$.pipe(findIndex(isValid))"
+  },
+  "first": {
+    "summary": "Take the first value, optionally matching a predicate.",
+    "behavior": "Emit the first eligible value and close upstream. If the source completes without one, use an explicit default or error with EmptyError.",
+    "example": "source$.pipe(first(isValid))"
+  },
+  "from": {
+    "summary": "Adapt an existing input into an Observable.",
+    "behavior": "Accept supported ObservableInputs such as arrays, iterables, promises, and other observables. Delivery timing follows the input. Wrapping an already running promise does not make its work lazy or cancellable.",
+    "example": "from([10, 20, 30])"
+  },
+  "generate": {
+    "summary": "Produce values by advancing a state.",
+    "behavior": "Start from an initial state, check the condition, emit a selected result, and advance with the iterate function. Without an explicit scheduler, generation is synchronous on subscription.",
+    "example": "generate(0, value => value < 5, value => value + 1)"
+  },
+  "groupBy": {
+    "summary": "Route values into streams identified by a key.",
+    "behavior": "The key selector chooses a group. Emit a new grouped Observable when a key first appears, then send matching values through it. Consume the live groups promptly; a duration option can close groups.",
+    "example": "source$.pipe(groupBy(getId))"
+  },
+  "ignoreElements": {
+    "summary": "Ignore values while preserving termination.",
+    "behavior": "Suppress every next notification. Forward complete or error, so the output communicates when the work ends without exposing its values.",
+    "example": "source$.pipe(ignoreElements())"
+  },
+  "interval": {
+    "summary": "Create a regular sequence of scheduled ticks.",
+    "behavior": "Each subscription owns a scheduled sequence starting at zero. The first value arrives after one period; it continues until cancelled. Use take or a lifecycle signal to bound it.",
+    "example": "interval(1000).pipe(take(withCount(5)))"
+  },
+  "isEmpty": {
+    "summary": "Ask whether a source emits no values.",
+    "behavior": "The first value produces false and early completion. If source completion comes first, emit true. A source that neither emits nor completes cannot answer.",
+    "example": "source$.pipe(isEmpty())"
+  },
+  "last": {
+    "summary": "Remember and emit the last eligible value.",
+    "behavior": "Keep the latest value matching the optional predicate. Emit it when the source completes. If none exists, use an explicit default or error with EmptyError.",
+    "example": "source$.pipe(last(isValid))"
+  },
+  "map": {
+    "summary": "Turn each incoming value into one outgoing value.",
+    "behavior": "Run the projection once for each value, preserving notification order. Constant and property controls choose alternative projections. Projection exceptions become output errors.",
+    "example": "source$.pipe(map(value => value * 2))"
+  },
+  "materialize": {
+    "summary": "Represent stream notifications as ordinary values.",
+    "behavior": "Emit a Notification value for each next, error, or complete event. After representing a terminal event as a value, the output completes normally.",
+    "example": "source$.pipe(materialize())"
+  },
+  "max": {
+    "summary": "Emit the greatest source value on completion.",
+    "behavior": "Keep the current maximum using the default comparison or a supplied comparer. Emit the winner at completion. An empty source completes without a value.",
+    "example": "source$.pipe(max())"
+  },
+  "merge": {
+    "summary": "Allow inner work to overlap, optionally with a limit.",
+    "behavior": "Admit work while capacity is available; otherwise queue source values. Project queued values when admitted. Forward values from all active inners as they arrive.",
+    "example": "requests$.pipe(merge(withProjection(load), withConcurrency(4)))"
+  },
+  "mergeScan": {
+    "summary": "Accumulate state through inner streams that may overlap.",
+    "behavior": "The accumulator returns an inner stream. Every inner value updates and emits the shared accumulator state. Overlapping inner results can arrive out of order; concurrency is an explicit policy choice.",
+    "example": "actions$.pipe(mergeScan(updateAsync, initialState, 1))"
+  },
+  "min": {
+    "summary": "Emit the smallest source value on completion.",
+    "behavior": "Keep the current minimum using the default comparison or a supplied comparer. Emit the winner at completion. An empty source completes without a value.",
+    "example": "source$.pipe(min())"
+  },
+  "multicast": {
+    "summary": "Route a source through a supplied Subject strategy.",
+    "behavior": "This legacy compatibility export supports a Subject or factory and optional selector. Without a selector it produces a connectable stream; connection lifetime must be managed explicitly.",
+    "example": "source$.pipe(multicast(() => new Subject()))"
+  },
+  "observeOn": {
+    "summary": "Schedule downstream notifications.",
+    "behavior": "Keep the source subscription timing, but schedule delivery of next, error, and complete notifications on the selected scheduler. Closing the subscription cancels pending scheduled delivery.",
+    "example": "source$.pipe(observeOn(asyncScheduler))"
+  },
+  "of": {
+    "summary": "Emit the supplied arguments as values.",
+    "behavior": "On each subscription, emit the arguments in order and then complete synchronously by default. An array argument is one value; use from to emit its elements.",
+    "example": "of(10, 20, 30)"
+  },
+  "onErrorResumeNext": {
+    "summary": "Continue with the next source after either kind of ending.",
+    "behavior": "Subscribe sequentially to the source and supplied streams. Move on after completion or error, suppressing those source errors. This is the legacy pipeable export.",
+    "example": "source$.pipe(onErrorResumeNext(fallback$))"
+  },
+  "pairwise": {
+    "summary": "Emit the previous and current value together.",
+    "behavior": "Remember one value. From the second value onward, emit a two-element array containing the previous value and the current value. Fewer than two inputs produce no pair.",
+    "example": "source$.pipe(pairwise())"
+  },
+  "partition": {
+    "summary": "Split accepted and rejected values into two streams.",
+    "behavior": "Return two Observables selected by a predicate and its negation. They subscribe independently, so a cold source can execute twice unless sharing is explicit.",
+    "example": "partition(isValid)(source$)"
+  },
+  "race": {
+    "summary": "Continue with the input that wins the race.",
+    "behavior": "This legacy pipeable form selects the first input to notify and cancels the other subscriptions. Early completion or error can decide the result before a value. Prefer raceWith for new code.",
+    "example": "source$.pipe(race(other$))"
+  },
+  "raceWith": {
+    "summary": "Let the first notifying input determine the output.",
+    "behavior": "Subscribe to competing inputs. The first next chooses its input and cancels the others; an earlier error or completion terminates the result. Later values come only from the winner.",
+    "example": "source$.pipe(raceWith(other$))"
+  },
+  "range": {
+    "summary": "Create a finite run of consecutive numbers.",
+    "behavior": "Emit count numbers starting at start, then complete. Without an explicit scheduler, each subscription receives the sequence synchronously.",
+    "example": "range(1, 5)"
+  },
+  "reduce": {
+    "summary": "Accumulate values and emit the final result.",
+    "behavior": "Update the accumulator for each value and emit only on source completion. With a seed, an empty source emits that seed; without a seed, an empty source emits nothing.",
+    "example": "source$.pipe(reduce((sum, value) => sum + value, 0))"
+  },
+  "refCount": {
+    "summary": "Keep a connectable source connected while it has consumers.",
+    "behavior": "This legacy operator manages the connection of a ConnectableObservable: connect for the first consumer and disconnect when the last leaves. It is not a general cleanup operator for ordinary Observables.",
+    "example": "connectableSource$.pipe(refCount())"
+  },
+  "repeat": {
+    "summary": "Subscribe again after successful completion.",
+    "behavior": "Forward each run, then resubscribe after completion according to the count and optional delay. Errors still propagate. Repetition repeats source execution and its effects.",
+    "example": "source$.pipe(repeat({ count: 3, delay: 1000 }))"
+  },
+  "repeatWhen": {
+    "summary": "Let a notifier decide when to repeat completed work.",
+    "behavior": "Source completion notifies a handler stream. A next from the returned notifier resubscribes; its completion or error controls termination. Source errors are not retried.",
+    "example": "source$.pipe(repeatWhen(completions$ => completions$.pipe(delay(1000))))"
+  },
+  "retry": {
+    "summary": "Subscribe again after an error.",
+    "behavior": "Forward values from each attempt. On error, resubscribe according to the retry count and optional delay; exhausted retries forward the error. Successful completion does not retry.",
+    "example": "source$.pipe(retry({ count: 2, delay: 1000 }))"
+  },
+  "retryWhen": {
+    "summary": "Let a notifier decide when to retry failed work.",
+    "behavior": "Source errors enter the handler stream. A next from its returned notifier starts another attempt; notifier completion completes the result and notifier errors fail it.",
+    "example": "source$.pipe(retryWhen(errors$ => errors$.pipe(delay(1000))))"
+  },
+  "sample": {
+    "summary": "Read the latest new value when a separate trigger fires.",
+    "behavior": "The notifier has its own timeline. On each notifier next, emit the latest source value only if a new source value arrived since the previous sample. Completion does not flush an unsampled value.",
+    "example": "source$.pipe(sample(withSignal(clicks$)))"
+  },
+  "scan": {
+    "summary": "Remember state and emit each update.",
+    "behavior": "Apply the accumulator on each source value and emit the new state immediately. A supplied seed initializes the accumulator but is not emitted by itself. Memory belongs to each subscription unless sharing is explicit.",
+    "example": "actions$.pipe(scan(update, initialState))"
+  },
+  "sequenceEqual": {
+    "summary": "Compare two complete sequences in order.",
+    "behavior": "Match values by position, buffering unmatched values while one input is ahead. A mismatch or unequal final length emits false; equal completed sequences emit true.",
+    "example": "source$.pipe(sequenceEqual(other$))"
+  },
+  "share": {
+    "summary": "Let consumers share a source connection.",
+    "behavior": "By default, the first consumer connects and the last disconnects. Replay, initial value, last value, manual connection, and reset controls select distinct sharing policies. Replay defaults must be chosen deliberately.",
+    "example": "source$.pipe(share(withReplay(1, { refCount: true })))"
+  },
+  "single": {
+    "summary": "Require exactly one matching value.",
+    "behavior": "Wait for completion to confirm uniqueness. More than one match errors with SequenceError. An empty source errors with EmptyError; a nonempty source with no predicate match errors with NotFoundError.",
+    "example": "source$.pipe(single(isValid))"
+  },
+  "skip": {
+    "summary": "Suppress an initial prefix or a trailing count.",
+    "behavior": "Count, signal, and while controls determine when the initial gate opens. From-end count holds a rolling tail and discards that tail on completion. An opened prefix gate stays open.",
+    "example": "source$.pipe(skip(withSignal(start$)))"
+  },
+  "startWith": {
+    "summary": "Deliver initial values before subscribing to the source.",
+    "behavior": "Emit the supplied prefix at subscription, then subscribe to and forward the source. The prefix belongs to each subscription and does not itself share state.",
+    "example": "source$.pipe(startWith(initialValue))"
+  },
+  "subscribeOn": {
+    "summary": "Schedule when the source subscription begins.",
+    "behavior": "Move the act of subscribing onto the selected scheduler, with an optional delay. It does not independently reschedule every later source value. Early cancellation can prevent subscription altogether.",
+    "example": "source$.pipe(subscribeOn(asyncScheduler))"
+  },
+  "switchLatest": {
+    "summary": "Keep only the newest inner stream connected.",
+    "behavior": "On a new source value, close the current inner before projecting and subscribing to its replacement. Outer completion waits for the current inner; downstream cancellation closes both.",
+    "example": "queries$.pipe(switchLatest(withProjection(search)))"
+  },
+  "switchScan": {
+    "summary": "Accumulate through only the latest inner stream.",
+    "behavior": "Each source value cancels the previous accumulator inner and starts a new one using the latest accumulated state. Each accepted inner value updates and emits that state.",
+    "example": "actions$.pipe(switchScan(updateAsync, initialState))"
+  },
+  "take": {
+    "summary": "Choose when to stop taking source values.",
+    "behavior": "Count closes after the limit; signal closes on notifier next; while closes on the first failing value. From-end count waits for source completion and then emits the remembered tail.",
+    "example": "source$.pipe(take(withCount(5)))"
+  },
+  "tap": {
+    "summary": "Observe notifications without changing their values.",
+    "behavior": "Run supplied observation functions while forwarding the stream. Effects run per subscription. An exception from a tap handler becomes an output error.",
+    "example": "source$.pipe(tap(value => console.log(value)))"
+  },
+  "throttle": {
+    "summary": "Limit admission while a duration signal is pending.",
+    "behavior": "By default, emit the admitted leading value and start waiting. Source values during the wait are suppressed. Edge controls can also keep and emit a trailing value.",
+    "example": "source$.pipe(throttle(withTime(1000), withEdges({ leading: true, trailing: true })))"
+  },
+  "throwIfEmpty": {
+    "summary": "Turn empty completion into an error.",
+    "behavior": "Forward values normally. If completion arrives without any value, call the supplied error factory, or use the default EmptyError.",
+    "example": "source$.pipe(throwIfEmpty(() => new Error('Expected a value')))"
+  },
+  "timeInterval": {
+    "summary": "Attach the elapsed scheduler time since the previous event.",
+    "behavior": "The first interval is measured from subscription; later intervals are measured from the previous value. Emit an object containing the source value and interval. This measures delivery rather than delaying it.",
+    "example": "source$.pipe(timeInterval())"
+  },
+  "timeout": {
+    "summary": "Require values to arrive before configured deadlines.",
+    "behavior": "Watch the first value and/or gaps between values using a scheduler. If a deadline expires, cancel the source and error with TimeoutError or switch to the configured fallback.",
+    "example": "source$.pipe(timeout({ first: 5000, each: 1000 }))"
+  },
+  "timeoutWith": {
+    "summary": "Switch to a fallback when a legacy timeout expires.",
+    "behavior": "A numeric due time limits gaps; a date sets an absolute deadline. Expiry closes the source and subscribes to the fallback. Prefer timeout with a with factory for new code.",
+    "example": "source$.pipe(timeoutWith(1000, fallback$))"
+  },
+  "timer": {
+    "summary": "Create a scheduled first tick and optional repeating ticks.",
+    "behavior": "Emit zero after the due time or date. Without a period, complete; with a period, keep counting until cancelled. Each subscription owns its scheduled work.",
+    "example": "timer(1000)"
+  },
+  "timestamp": {
+    "summary": "Attach the scheduler clock reading to each value.",
+    "behavior": "Emit an object containing the source value and the scheduler timestamp at delivery. This observes the clock and does not delay the value.",
+    "example": "source$.pipe(timestamp())"
+  },
+  "toArray": {
+    "summary": "Collect the whole finite source into one array.",
+    "behavior": "Append each value to an array and emit it at source completion. An empty source emits an empty array. An unbounded source requires a stopping rule to produce a result.",
+    "example": "source$.pipe(toArray())"
+  },
+  "window": {
+    "summary": "Route values through separately emitted inner streams.",
+    "behavior": "Emit an inner Observable when a window opens and route source values through it until closure. Controls define count, time, and signals. Unlike buffer, values flow live inside each group.",
+    "example": "source$.pipe(window(withCount(3)))"
+  },
+  "withLatestFrom": {
+    "summary": "Let the source trigger a tuple using current peer values.",
+    "behavior": "Wait for all peers to supply a first value. Then only source values trigger an output tuple; peer updates merely replace remembered values. Source completion completes the result.",
+    "example": "actions$.pipe(withLatestFrom(state$))"
+  },
+  "zip": {
+    "summary": "Pair values by their positions across inputs.",
+    "behavior": "Queue unmatched values and emit tuples when every input has a value for the next position. Complete when a completed input has no queued value left. This is the pipeable export.",
+    "example": "source$.pipe(zip(other$))"
+  },
+  "zipAll": {
+    "summary": "Collect inner streams, then zip their values by position.",
+    "behavior": "Wait for outer completion, subscribe to the collected inner streams, and emit position-matched tuples. A fast inner can build a queue while waiting for slower peers.",
+    "example": "inners$.pipe(zipAll())"
+  },
+  "zipWith": {
+    "summary": "Join the first values, then the second, and so on.",
+    "behavior": "Subscribe to source and peers and keep a queue for each. Emit the next tuple when all queues have a value. A completed and exhausted input ends the output.",
+    "example": "source$.pipe(zipWith(other$))"
+  }
+}

@@ -72,6 +72,18 @@ The 15 consolidated families are `audit`, `sample`, `throttle`, `debounce`, `buf
 
 The remaining 58 names are compatibility exports, including some deprecated RxJS names. Further normalization is a design task, not a claim already completed. `npm run inventory` checks the actual runtime exports, the 113-name baseline, complete name mappings, the three learning groups, and the separate helper count.
 
+## Operator website
+
+Browse [all 80 operators](https://hansschenker.github.io/rxjs-80/catalog.html) on the [VitePress site](https://hansschenker.github.io/rxjs-80/). The site includes behavior descriptions, family configurations, original-name search, Value/Time/Route filters, migration guidance, and verification references.
+
+```bash
+npm run docs:dev
+npm run docs:build
+npm run docs:preview
+```
+
+See [site maintenance](docs/guide/site-maintenance.md) for generation and deployment.
+
 ## Run the project
 
 ```bash
@@ -95,8 +107,10 @@ This repository is an **initial 0.1 implementation**, not a published npm releas
 
 Verification follows **Intuition → Specification → Verification**. See the [audit BDD scenarios](docs/AUDIT.feature), [semantic notes](docs/SEMANTICS.md), and [roadmap](docs/ROADMAP.md). Tests provide executable evidence; no formal proof or complete RxJS conformance claim is made.
 
-## Attribution
+## Contributors and attribution
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) and the [site contributor page](https://hansschenker.github.io/rxjs-80/contributors.html).
 
 - **Hans Schenker** — project direction, behavioral vocabulary, API design discussion, and review.
-- **ChatGPT (OpenAI)** — **main contributor and co-author** of the initial design, implementation, learning material, and verification suite, developed collaboratively with Hans Schenker.
+- **ChatGPT (OpenAI)** — **main contributor and co-author** of the initial design, implementation, learning material, verification suite, and VitePress website, developed collaboratively with Hans Schenker.
 - **RxJS contributors** — the underlying runtime and operator implementations. RxJS is distributed under Apache-2.0; this facade has its own MIT license.
